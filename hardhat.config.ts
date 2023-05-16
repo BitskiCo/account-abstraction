@@ -8,6 +8,8 @@ import 'solidity-coverage'
 
 import * as fs from 'fs'
 
+require("hardhat-tracer");
+
 const mnemonicFileName = process.env.MNEMONIC_FILE ?? `${process.env.HOME}/.secret/testnet-mnemonic.txt`
 let mnemonic = 'test '.repeat(11) + 'junk'
 if (fs.existsSync(mnemonicFileName)) { mnemonic = fs.readFileSync(mnemonicFileName, 'ascii') }
@@ -54,6 +56,7 @@ const config: HardhatUserConfig = {
     localgeth: { url: 'http://localgeth:8545' },
     goerli: getNetwork('goerli'),
     sepolia: getNetwork('sepolia'),
+    mumbai: getNetwork('polygon-mumbai'),
     proxy: getNetwork1('http://localhost:8545')
   },
   mocha: {

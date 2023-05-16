@@ -2,7 +2,7 @@
 pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/utils/Create2.sol";
-import "@gnosis.pm/safe-contracts/contracts/proxies/GnosisSafeProxyFactory.sol";
+import "@safe-global/safe-contracts/contracts/proxies/SafeProxyFactory.sol";
 import "./EIP4337Manager.sol";
 
 /**
@@ -10,11 +10,11 @@ import "./EIP4337Manager.sol";
  */
 contract GnosisSafeAccountFactory {
 
-    GnosisSafeProxyFactory public immutable proxyFactory;
+    SafeProxyFactory public immutable proxyFactory;
     address public immutable safeSingleton;
     EIP4337Manager public immutable eip4337Manager;
 
-    constructor(GnosisSafeProxyFactory _proxyFactory, address _safeSingleton, EIP4337Manager _eip4337Manager) {
+    constructor(SafeProxyFactory _proxyFactory, address _safeSingleton, EIP4337Manager _eip4337Manager) {
         proxyFactory = _proxyFactory;
         safeSingleton = _safeSingleton;
         eip4337Manager = _eip4337Manager;
@@ -39,7 +39,7 @@ contract GnosisSafeAccountFactory {
         bytes memory setup4337Modules = abi.encodeCall(
             EIP4337Manager.setup4337Modules, (eip4337Manager));
 
-        return abi.encodeCall(GnosisSafe.setup, (
+        return abi.encodeCall(Safe.setup, (
             owners, threshold,
             address (eip4337Manager), setup4337Modules,
             eip4337fallback,
@@ -49,7 +49,7 @@ contract GnosisSafeAccountFactory {
 
     /**
      * calculate the counterfactual address of this account as it would be returned by createAccount()
-     * (uses the same "create2 signature" used by GnosisSafeProxyFactory.createProxyWithNonce)
+     * (uses the same "create2 signature" used by SafeProxyFactory.createProxyWithNonce)
      */
     function getAddress(address owner,uint256 salt) public view returns (address) {
         bytes memory initializer = getInitializer(owner);

@@ -11,7 +11,7 @@ import {
   GnosisSafeAccountFactory,
   GnosisSafeAccountFactory__factory,
   GnosisSafeProxy,
-  GnosisSafeProxyFactory__factory,
+  SafeProxyFactory__factory,
   GnosisSafe__factory,
   TestCounter,
   TestCounter__factory
@@ -57,7 +57,7 @@ describe('Gnosis Proxy', function () {
     // standard safe singleton contract (implementation)
     safeSingleton = await new GnosisSafe__factory(ethersSigner).deploy()
     // standard safe proxy factory
-    const proxyFactory = await new GnosisSafeProxyFactory__factory(ethersSigner).deploy()
+    const proxyFactory = await new SafeProxyFactory__factory(ethersSigner).deploy()
     entryPoint = await deployEntryPoint()
     manager = await new EIP4337Manager__factory(ethersSigner).deploy(entryPoint.address)
     owner = createAccountOwner()
