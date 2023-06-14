@@ -56,6 +56,7 @@ const config: HardhatUserConfig = {
     localgeth: { url: 'http://localgeth:8545' },
     goerli: getNetwork('goerli'),
     sepolia: getNetwork('sepolia'),
+    polygon: getNetwork('polygon-mainnet'),
     mumbai: getNetwork('polygon-mumbai'),
     proxy: getNetwork1('http://localhost:8545')
   },

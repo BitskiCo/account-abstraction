@@ -6,8 +6,8 @@ import { getProxyFactoryDeployment, getSafeSingletonDeployment } from '@safe-glo
 const deployGnosisAccountFactory: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const chainId = await hre.getChainId()
 
-  const proxyFactory = getProxyFactoryDeployment()?.networkAddresses[chainId]
-  const safeSingleton = getSafeSingletonDeployment({ version: '1.4.0', released: undefined })?.defaultAddress
+  const proxyFactory = '0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67' // getProxyFactoryDeployment()?.networkAddresses[chainId]
+  const safeSingleton = '0x41675C099F32341bf84BFc5382aF534df5C7461a' // getSafeSingletonDeployment({ version: '1.4.1', released: undefined })?.defaultAddress
 
   console.log('Deploying using SAFE', safeSingleton)
 
